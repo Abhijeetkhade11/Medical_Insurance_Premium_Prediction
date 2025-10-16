@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MedInsure AI — Tips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="inner container">
+      <div class="brand"><div class="logo">❤</div> MedInsure AI</div>
+      <div>
+        <a id="nav-home" href="./index.html">Home</a>
+        <a id="nav-predict" href="./predict.html">Predict</a>
+        <a id="nav-analysis" href="./analysis.html">Analysis</a>
+        <a id="nav-tips" class="active" href="./tips.html">Tips</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="h1">Wellness Tips</h1>
+    <div class="card">
+      <div class="tips-controls">
+        <label>Focus</label>
+        <select id="focus">
+          <option value="all">All</option>
+          <option value="bmi">BMI</option>
+          <option value="smoking">Smoking</option>
+          <option value="prevention">Prevention</option>
+          <option value="lifestyle">Lifestyle</option>
+        </select>
+        <button class="btn" id="shuffle">New Tip</button>
+      </div>
+      <div class="tip-grid" id="tips"></div>
+    </div>
+    <div class="footer">Educational content only. Consult healthcare professionals for personal advice.</div>
+  </div>
+
+  <script src="./assets/main.js"></script>
+  <script src="./assets/tips.js"></script>
+  <script>setActive('nav-tips')</script>
+</body>
+</html>

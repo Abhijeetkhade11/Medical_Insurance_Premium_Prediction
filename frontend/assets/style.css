@@ -1,0 +1,55 @@
+:root{
+  --white:#FFFFFF;
+  --light:#E6F4F9;
+  --primary:#2B8EFF; /* Medical Blue */
+  --primary-dark:#1f6ed3;
+  --teal:#00BFA5;
+  --soft:#F5F5F5;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Poppins', Inter, system-ui, Arial, sans-serif;background:var(--light);color:var(--text)}
+/* Medical vibe background */
+body{
+  background:
+    radial-gradient(1400px 700px at -10% -20%, rgba(43,142,255,.08), transparent),
+    radial-gradient(900px 500px at 110% 0%, rgba(0,191,165,.08), transparent),
+    linear-gradient(180deg, #E6F4F9, #F5F5F5 50%, #EAF7FB 100%);
+}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+/* Sticky medical navbar */
+.nav{background:var(--primary);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 8px 24px rgba(2,6,23,.15)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--primary));display:flex;align-items:center;justify-content:center;color:#fff}
+.nav a{color:#e9f2ff;text-decoration:none;margin:0 10px;padding:8px 12px;border-radius:10px;transition:all .2s ease}
+.nav a.active,.nav a:hover{background:rgba(255,255,255,.15);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.15) inset}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;padding:48px 0}
+.card{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #e5e7eb;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(2,6,23,.08)}
+.h1{font-size:36px;margin:0 0 12px}
+.p{color:var(--muted);margin:0 0 16px}
+/* Gradient button with glow */
+.btn{background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;padding:12px 18px;border:none;border-radius:12px;cursor:pointer;box-shadow:0 8px 18px rgba(43,142,255,.25);transition:transform .15s ease, box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,191,165,.35)}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.form label{display:block;margin:8px 0 4px;color:var(--muted)}
+.form input,.form select{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi .item{background:#ffffffb8;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06)}
+.footer{padding:30px 0;color:var(--muted);text-align:center}
+.chart{height:340px}
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeIn .5s ease both}
+.slide-up{animation:slideUp .6s ease both}
+/* Tips page */
+.tips-controls{display:flex;gap:10px;align-items:center;margin:10px 0}
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tip-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:rgba(255,255,255,.75);backdrop-filter: blur(6px);transition:transform .15s ease, box-shadow .2s ease}
+.tip-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(2,6,23,.12)}
+.tip-card h4{margin:0 0 8px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}.kpi{grid-template-columns:1fr 1fr}}

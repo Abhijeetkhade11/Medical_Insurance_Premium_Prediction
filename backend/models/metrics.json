@@ -1,0 +1,12 @@
+{
+  "mae": 2404.90176028892,
+  "r2": 0.8793364486536337,
+  "features": [
+    "age",
+    "sex",
+    "bmi",
+    "children",
+    "smoker",
+    "region"
+  ]
+}

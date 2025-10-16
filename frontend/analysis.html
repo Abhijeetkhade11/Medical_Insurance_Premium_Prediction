@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MedInsure AI — Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css"/>
+  <script src="./assets/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="inner container">
+      <div class="brand"><div class="logo">❤</div> MedInsure AI</div>
+      <div>
+        <a id="nav-home" href="./index.html">Home</a>
+        <a id="nav-predict" href="./predict.html">Predict</a>
+        <a id="nav-analysis" class="active" href="./analysis.html">Analysis</a>
+        <a id="nav-tips" href="./tips.html">Tips</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="h1">Dataset Insights</h1>
+    <div id="status" class="p" style="color:var(--muted);"></div>
+    <div class="kpi" id="kpi-rows"></div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card fade-in"><h3>📊 Smokers vs Non-Smokers</h3><canvas id="pieSmoker" class="chart"></canvas></div>
+      <div class="card fade-in"><h3>🗺️ Avg Charges by Region</h3><canvas id="barRegion" class="chart"></canvas></div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card fade-in"><h3>🧬 Charges vs BMI</h3><canvas id="scatterBmiCharges" class="chart"></canvas></div>
+      <div class="card fade-in"><h3>📈 Charges vs Age</h3><canvas id="lineAgeCharges" class="chart"></canvas></div>
+    </div>
+
+    <div class="card fade-in" style="margin-top:16px">
+      <h3>🧪 Charges distribution by Smoker</h3>
+      <canvas id="boxSmokerCharges" class="chart"></canvas>
+    </div>
+  </div>
+
+  <script src="./assets/main.js"></script>
+  <script src="./assets/analysis.js"></script>
+</body>
+</html>
