@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MedInsure AI — Clustering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css"/>
+  <script src="./assets/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="inner container">
+      <div class="brand"><div class="logo">❤</div> MedInsure AI</div>
+      <div>
+        <a id="nav-home" href="./index.html">Home</a>
+        <a id="nav-predict" href="./predict.html">Predict</a>
+        <a id="nav-analysis" href="./analysis.html">Analysis</a>
+        <a id="nav-clustering" class="active" href="./clustering.html">Clustering</a>
+        <a id="nav-apriori" href="./apriori.html">Apriori</a>
+        <a id="nav-tips" href="./tips.html">Tips</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="h1">Customer Segments (K-Means)</h1>
+    <div class="card" style="margin-bottom:12px">
+      <div class="form" style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px">
+        <div>
+          <label>K clusters</label>
+          <select id="kSelect">
+            <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div style="grid-column:span 3">
+          <label>Features</label>
+          <div class="checkboxes" id="featSel" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+            <label><input type="checkbox" value="age" checked> age</label>
+            <label><input type="checkbox" value="bmi" checked> bmi</label>
+            <label><input type="checkbox" value="charges" checked> charges</label>
+            <label><input type="checkbox" value="children"> children</label>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <button class="btn" id="runBtn">Run Clustering</button>
+          <button class="icon-btn" id="resetDefaults" title="Reset defaults">Defaults</button>
+          <button class="icon-btn" id="resetHighlight" title="Reset highlight">Reset</button>
+        </div>
+        <div style="display:flex;align-items:flex-end"><button class="icon-btn" id="exportCsv">Export CSV</button></div>
+      </div>
+      <div class="p" style="margin-top:8px">Frontend-only simulation. Hook: POST /api/clusters to run on server and return assignments + centers.</div>
+      <div id="clusterInsight" class="p" style="margin-top:6px;color:var(--muted)"></div>
+    </div>
+
+    <div class="grid two">
+      <div class="card fade-in">
+        <div class="card-head"><div class="title">🧭 Scatter (BMI vs Charges)</div><div class="actions"><button class="icon-btn" id="clusterDownload">⬇</button><button class="icon-btn" id="clusterExpand">⛶</button></div></div>
+        <canvas id="clusterScatter" class="chart"></canvas>
+        <div class="insight" id="scatterNote">Click a cluster card to highlight points. Reset to show all.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="title">🧩 Cluster Summaries</div></div>
+        <div id="clusterCards" class="grid two"></div>
+      </div>
+    </div>
+
+      <div class="card" style="margin-top:12px">
+      <div class="card-head"><div class="title">📋 Cluster Members</div><div class="actions"><label class="p">Filter</label><select id="clusterFilter"><option value="all">All</option><option value="1">Cluster 1</option><option value="2">Cluster 2</option><option value="3">Cluster 3</option><option value="4">Cluster 4</option><option value="5">Cluster 5</option><option value="6">Cluster 6</option></select></div></div>
+      <div style="overflow:auto">
+        <table id="clusterTable" style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr>
+              <th>age</th><th>sex</th><th>bmi</th><th>children</th><th>smoker</th><th>charges</th><th>cluster</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="p" style="margin-top:8px">Explain: Clusters group members with similar BMI/charges (and selected features). Try different K.</div>
+    </div>
+
+    <div class="grid three" style="margin-top:12px">
+      <div class="card">
+        <div class="card-head"><div class="title">📊 Cluster Sizes</div></div>
+        <canvas id="chartClusterSizes" class="chart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="title">📦 Charges Spread by Cluster</div></div>
+        <canvas id="chartClusterCharges" class="chart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="title">🕸️ Cluster Radar</div></div>
+        <canvas id="chartClusterRadar" class="chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="clusterModal" hidden>
+    <div class="modal">
+      <div class="modal-head"><div class="title">Cluster Scatter — Expanded</div><div class="actions"><button class="icon-btn" id="clusterModalDownload">⬇</button><button class="icon-btn" id="clusterModalClose">✕</button></div></div>
+      <div class="modal-body"><canvas id="clusterModalCanvas"></canvas></div>
+    </div>
+  </div>
+
+  <script src="./assets/main.js"></script>
+  <script src="./assets/clustering.js"></script>
+</body>
+</html>

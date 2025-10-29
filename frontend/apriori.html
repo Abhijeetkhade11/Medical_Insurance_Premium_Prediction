@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MedInsure AI — Apriori</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="inner container">
+      <div class="brand"><div class="logo">❤</div> MedInsure AI</div>
+      <div>
+        <a id="nav-home" href="./index.html">Home</a>
+        <a id="nav-predict" href="./predict.html">Predict</a>
+        <a id="nav-analysis" href="./analysis.html">Analysis</a>
+        <a id="nav-clustering" href="./clustering.html">Clustering</a>
+        <a id="nav-apriori" class="active" href="./apriori.html">Apriori</a>
+        <a id="nav-tips" href="./tips.html">Tips</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="h1">Association Rules (Apriori)</h1>
+    <div class="card" style="margin-bottom:12px">
+      <div class="form" style="display:grid;grid-template-columns:repeat(8,1fr);gap:12px;align-items:end">
+        <div>
+          <label>Support</label>
+          <input id="sup" type="range" min="0.01" max="0.5" step="0.01" value="0.05">
+          <div class="range-labels"><span id="supLbl">0.05</span></div>
+        </div>
+        <div>
+          <label>Confidence</label>
+          <input id="conf" type="range" min="0.1" max="1" step="0.05" value="0.5">
+          <div class="range-labels"><span id="confLbl">0.50</span></div>
+        </div>
+        <div>
+          <label>Min Lift</label>
+          <input id="lift" type="number" min="1" max="10" step="0.1" value="1.2">
+        </div>
+        <div>
+          <label>Target</label>
+          <select id="target">
+            <option value="charges">Charges Category</option>
+            <option value="bmi">BMI Category</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn" id="genBtn">Generate Rules</button>
+          <button class="icon-btn" id="exportRules">Export CSV</button>
+        </div>
+        <div style="grid-column:span 3">
+          <label>Search rules</label>
+          <input id="ruleSearch" placeholder="Search antecedent/consequent...">
+        </div>
+      </div>
+      <div class="p" style="margin-top:8px">Frontend-only simulated rules. Hook: POST /api/apriori returns rules with fields: antecedent, consequent, support, confidence, lift.</div>
+    </div>
+
+    <section class="kpi-strip" id="aprioriKPI"></section>
+
+    <div class="grid two">
+      <div class="card">
+        <div class="card-head"><div class="title">📋 Top Rules</div></div>
+        <div style="overflow:auto">
+          <table id="rulesTable" style="width:100%;border-collapse:collapse">
+            <thead><tr>
+              <th data-sort="a">Antecedent</th>
+              <th data-sort="c">Consequent</th>
+              <th data-sort="support">Support</th>
+              <th data-sort="confidence">Confidence</th>
+              <th data-sort="lift">Lift</th>
+              <th>Action</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div>
+            <button class="icon-btn" id="prevPage">Prev</button>
+            <span id="pageInfo" class="p"></span>
+            <button class="icon-btn" id="nextPage">Next</button>
+          </div>
+          <div>
+            <label class="p">Page size</label>
+            <select id="pageSize"><option>10</option><option selected>20</option><option>50</option></select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="title">🕸️ Network</div><div class="actions"><button class="icon-btn" id="netExpand">⛶</button></div></div>
+        <div style="position:relative">
+          <canvas id="rulesNet" height="340"></canvas>
+          <div id="netTip" class="card" style="position:absolute;pointer-events:none;font-size:12px;padding:6px;display:none"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:12px" id="insightCards"></div>
+  </div>
+
+  <div class="modal-overlay" id="ruleModal" hidden>
+    <div class="modal">
+      <div class="modal-head"><div class="title">Rule Details</div><div class="actions"><button class="icon-btn" id="ruleClose">✕</button></div></div>
+      <div class="modal-body">
+        <div id="ruleText" class="p" style="font-weight:600"></div>
+        <div class="p" id="ruleMetrics"></div>
+        <div class="p" id="ruleInterpretation" style="margin-top:6px"></div>
+        <div class="p" style="margin-top:8px">Example transactions (dummy):
+          <ul id="ruleExamples"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="netModal" hidden>
+    <div class="modal">
+      <div class="modal-head"><div class="title">Rules Network — Expanded</div><div class="actions"><button class="icon-btn" id="netClose">✕</button></div></div>
+      <div class="modal-body"><canvas id="netCanvas" height="520"></canvas></div>
+    </div>
+  </div>
+
+  <script src="./assets/main.js"></script>
+  <script src="./assets/apriori.js"></script>
+</body>
+</html>

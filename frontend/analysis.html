@@ -16,29 +16,134 @@
         <a id="nav-home" href="./index.html">Home</a>
         <a id="nav-predict" href="./predict.html">Predict</a>
         <a id="nav-analysis" class="active" href="./analysis.html">Analysis</a>
+        <a id="nav-clustering" href="./clustering.html">Clustering</a>
+        <a id="nav-apriori" href="./apriori.html">Apriori</a>
         <a id="nav-tips" href="./tips.html">Tips</a>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <h1 class="h1">Dataset Insights</h1>
-    <div id="status" class="p" style="color:var(--muted);"></div>
-    <div class="kpi" id="kpi-rows"></div>
+    <div class="layout">
+      <aside class="sidebar" id="filtersPanel">
+        <div class="sidebar-head">
+          <h3>Filters</h3>
+          <button class="icon-btn" id="toggleSidebar" title="Collapse">⟨</button>
+        </div>
+        <div class="filters form">
+          <label>Region</label>
+          <div class="checkboxes" id="filter-region">
+            <label><input type="checkbox" value="northeast"> Northeast</label>
+            <label><input type="checkbox" value="northwest"> Northwest</label>
+            <label><input type="checkbox" value="southeast"> Southeast</label>
+            <label><input type="checkbox" value="southwest"> Southwest</label>
+          </div>
+          <label>Smoker</label>
+          <div class="seg" id="filter-smoker">
+            <button data-val="all" class="seg-btn active">All</button>
+            <button data-val="yes" class="seg-btn">Yes</button>
+            <button data-val="no" class="seg-btn">No</button>
+          </div>
+          <label>Age range</label>
+          <div class="range">
+            <input id="ageMin" type="range" min="18" max="64" value="18">
+            <input id="ageMax" type="range" min="18" max="64" value="64">
+            <div class="range-labels"><span id="ageMinLbl">18</span><span id="ageMaxLbl">64</span></div>
+          </div>
+          <label>Children</label>
+          <select id="filter-children">
+            <option value="all">All</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button class="btn" id="resetFilters" style="margin-top:12px">Reset filters</button>
+        </div>
+        <div class="sql-preview">
+          <div class="sql-head">SQL Preview</div>
+          <pre id="sqlText"></pre>
+        </div>
+      </aside>
 
-    <div class="grid two" style="margin-top:16px">
-      <div class="card fade-in"><h3>📊 Smokers vs Non-Smokers</h3><canvas id="pieSmoker" class="chart"></canvas></div>
-      <div class="card fade-in"><h3>🗺️ Avg Charges by Region</h3><canvas id="barRegion" class="chart"></canvas></div>
+      <main class="content">
+        <h1 class="h1">Balanced Grid Dashboard</h1>
+        <div id="status" class="p" style="color:var(--muted);"></div>
+
+        <section class="kpi-strip" id="kpiStrip">
+          <div class="kpi-card">
+            <div class="kpi-title">Average Annual Premium</div>
+            <div class="kpi-value" id="kpi-premium">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">% Smokers</div>
+            <div class="kpi-value" id="kpi-smokers">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Average BMI</div>
+            <div class="kpi-value" id="kpi-bmi">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Highest Premium</div>
+            <div class="kpi-value" id="kpi-highest">—</div>
+          </div>
+        </section>
+
+        <section class="grid-dashboard" id="grid">
+          <div class="card card-lg fade-in" data-card="scatter">
+            <div class="card-head"><div class="title">🧬 Charges vs BMI</div><div class="actions"><button class="icon-btn" data-download title="Download PNG">⬇</button><button class="icon-btn" data-expand title="Expand">⛶</button></div></div>
+            <canvas id="chart-scatter" class="chart"></canvas>
+            <div class="insight">Smokers cluster at higher charges for similar BMI.</div>
+          </div>
+
+          <div class="card card-md fade-in" data-card="bar-region">
+            <div class="card-head"><div class="title">🗺️ Avg Charges by Region</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
+            <canvas id="chart-bar-region" class="chart"></canvas>
+            <div class="insight">Regional averages are broadly similar.</div>
+          </div>
+
+          <div class="card card-md fade-in" data-card="box-smoker">
+            <div class="card-head"><div class="title">📦 Charges Distribution by Smoker</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
+            <canvas id="chart-box-smoker" class="chart"></canvas>
+            <div class="insight">Smokers show median premium ~4x higher.</div>
+          </div>
+
+          <div class="card card-sm fade-in" data-card="pie-smoker">
+            <div class="card-head"><div class="title">🥧 Smokers vs Non-Smokers</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
+            <canvas id="chart-pie-smoker" class="chart"></canvas>
+            <div class="insight">~20% of members are smokers.</div>
+          </div>
+
+          <div class="card card-sm fade-in" data-card="group-children">
+            <div class="card-head"><div class="title">👨‍👩‍👧 Avg Charges by Children</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
+            <canvas id="chart-group-children" class="chart"></canvas>
+            <div class="insight">Premiums trend slightly with dependents.</div>
+          </div>
+
+          <div class="card fade-in" data-card="line-age">
+            <div class="card-head"><div class="title">📈 Charges vs Age</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
+            <canvas id="chart-line-age" class="chart"></canvas>
+            <div class="insight">Older ages often see higher premiums.</div>
+          </div>
+        </section>
+      </main>
     </div>
+  </div>
 
-    <div class="grid two" style="margin-top:16px">
-      <div class="card fade-in"><h3>🧬 Charges vs BMI</h3><canvas id="scatterBmiCharges" class="chart"></canvas></div>
-      <div class="card fade-in"><h3>📈 Charges vs Age</h3><canvas id="lineAgeCharges" class="chart"></canvas></div>
-    </div>
-
-    <div class="card fade-in" style="margin-top:16px">
-      <h3>🧪 Charges distribution by Smoker</h3>
-      <canvas id="boxSmokerCharges" class="chart"></canvas>
+  <div class="modal-overlay" id="modal" hidden>
+    <div class="modal">
+      <div class="modal-head">
+        <div class="title" id="modalTitle">Expanded View</div>
+        <div class="actions"><button class="icon-btn" id="modalDownload">⬇</button><button class="icon-btn" id="modalClose">✕</button></div>
+      </div>
+      <div class="modal-body">
+        <canvas id="modalCanvas"></canvas>
+        <div class="modal-controls">
+          <!-- Additional controls can be appended here per chart -->
+        </div>
+      </div>
     </div>
   </div>
 

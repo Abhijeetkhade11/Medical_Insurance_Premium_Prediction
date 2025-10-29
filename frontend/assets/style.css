@@ -53,3 +53,215 @@ body{
 .tip-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(2,6,23,.12)}
 .tip-card h4{margin:0 0 8px}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}.kpi{grid-template-columns:1fr 1fr}}
+
+/* === Dashboard layout additions === */
+.layout{display:grid;grid-template-columns:280px 1fr;gap:16px}
+.sidebar{position:sticky;top:74px;align-self:start;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #e5e7eb;border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06);max-height:calc(100vh - 90px);overflow:auto}
+.sidebar.collapsed{width:56px;padding:12px}
+.sidebar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.icon-btn{background:transparent;border:1px solid #e5e7eb;border-radius:10px;padding:6px 8px;cursor:pointer}
+.icon-btn:hover{background:#f8fafc}
+.checkboxes label{display:flex;gap:8px;align-items:center;margin:6px 0}
+.seg{display:flex;gap:6px}
+.seg-btn{padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer}
+.seg-btn.active{background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;border-color:transparent}
+.range{display:grid;gap:6px}
+.range input{width:100%}
+.range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.sql-preview{margin-top:16px;border-top:1px dashed #e5e7eb;padding-top:10px}
+.sql-head{font-weight:600;color:var(--muted);margin-bottom:6px}
+.sql-preview pre{white-space:pre-wrap;font-size:12px;color:#0b1220;background:#f7fafc;border:1px solid #e5e7eb;border-radius:8px;padding:10px}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:12px}
+.kpi-card{background:#ffffffb8;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06)}
+.kpi-title{font-size:12px;color:var(--muted)}
+.kpi-value{font-size:26px;font-weight:700}
+
+.grid-dashboard{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card-lg{grid-column:span 12}
+.card-md{grid-column:span 6}
+.card-sm{grid-column:span 6}
+.card .card-head{display:flex;align-items:center;justify-content:space-between;margin:-6px -6px 8px}
+.card .card-head .title{font-weight:600}
+.card .actions{display:flex;gap:6px}
+.insight{margin-top:8px;font-size:12px;color:var(--muted)}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.4);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal{background:#fff;border-radius:16px;max-width:1100px;width:96%;max-height:90vh;display:flex;flex-direction:column;border:1px solid #e5e7eb}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #e5e7eb}
+.modal-body{padding:12px;overflow:auto}
+.modal[hidden]{display:none}
+
+@media(max-width:1100px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:relative;top:0}
+  .grid-dashboard{grid-template-columns:repeat(6,1fr)}
+  .card-lg{grid-column:span 6}
+  .card-md{grid-column:span 6}
+  .card-sm{grid-column:span 3}
+}
+
+:root{
+  --white:#FFFFFF;
+  --light:#E6F4F9;
+  --primary:#2B8EFF; /* Medical Blue */
+  --primary-dark:#1f6ed3;
+  --teal:#00BFA5;
+  --soft:#F5F5F5;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Poppins', Inter, system-ui, Arial, sans-serif;background:var(--light);color:var(--text)}
+/* Medical vibe background */
+body{
+  background:
+    radial-gradient(1400px 700px at -10% -20%, rgba(43,142,255,.08), transparent),
+    radial-gradient(900px 500px at 110% 0%, rgba(0,191,165,.08), transparent),
+    linear-gradient(180deg, #E6F4F9, #F5F5F5 50%, #EAF7FB 100%);
+}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+/* Sticky medical navbar */
+.nav{background:var(--primary);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 8px 24px rgba(2,6,23,.15)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--primary));display:flex;align-items:center;justify-content:center;color:#fff}
+.nav a{color:#e9f2ff;text-decoration:none;margin:0 10px;padding:8px 12px;border-radius:10px;transition:all .2s ease}
+.nav a.active,.nav a:hover{background:rgba(255,255,255,.15);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.15) inset}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;padding:48px 0}
+.card{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #e5e7eb;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(2,6,23,.08);overflow:hidden}
+.h1{font-size:36px;margin:0 0 12px}
+.p{color:var(--muted);margin:0 0 16px}
+/* Gradient button with glow */
+.btn{background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;padding:12px 18px;border:none;border-radius:12px;cursor:pointer;box-shadow:0 8px 18px rgba(43,142,255,.25);transition:transform .15s ease, box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,191,165,.35)}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.form label{display:block;margin:8px 0 4px;color:var(--muted)}
+.form input,.form select{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi .item{background:#ffffffb8;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06)}
+.footer{padding:30px 0;color:var(--muted);text-align:center}
+.chart{height:300px;max-height:300px;display:block}
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeIn .5s ease both}
+.slide-up{animation:slideUp .6s ease both}
+/* Tips page */
+.tips-controls{display:flex;gap:10px;align-items:center;margin:10px 0}
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tip-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:rgba(255,255,255,.75);backdrop-filter: blur(6px);transition:transform .15s ease, box-shadow .2s ease}
+.tip-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(2,6,23,.12)}
+.tip-card h4{margin:0 0 8px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}.kpi{grid-template-columns:1fr 1fr}}
+
+/* === Dashboard layout additions === */
+.layout{display:grid;grid-template-columns:280px 1fr;gap:16px}
+.sidebar{position:sticky;top:74px;align-self:start;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #e5e7eb;border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06);max-height:calc(100vh - 90px);overflow:auto}
+.sidebar.collapsed{width:56px;padding:12px}
+.sidebar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.icon-btn{background:transparent;border:1px solid #e5e7eb;border-radius:10px;padding:6px 8px;cursor:pointer}
+.icon-btn:hover{background:#f8fafc}
+.checkboxes label{display:flex;gap:8px;align-items:center;margin:6px 0}
+.seg{display:flex;gap:6px}
+.seg-btn{padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer}
+.seg-btn.active{background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;border-color:transparent}
+.range{display:grid;gap:6px}
+.range input{width:100%}
+.range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.sql-preview{margin-top:16px;border-top:1px dashed #e5e7eb;padding-top:10px}
+.sql-head{font-weight:600;color:var(--muted);margin-bottom:6px}
+.sql-preview pre{white-space:pre-wrap;font-size:12px;color:#0b1220;background:#f7fafc;border:1px solid #e5e7eb;border-radius:8px;padding:10px}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:12px}
+.kpi-card{background:#ffffffb8;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06)}
+.kpi-title{font-size:12px;color:var(--muted)}
+.kpi-value{font-size:26px;font-weight:700}
+
+.grid-dashboard{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card-lg{grid-column:span 12}
+.card-md{grid-column:span 6}
+.card-sm{grid-column:span 6}
+.card .card-head{display:flex;align-items:center;justify-content:space-between;margin:-6px -6px 8px}
+.card .card-head .title{font-weight:600}
+.card .actions{display:flex;gap:6px}
+.insight{margin-top:8px;font-size:12px;color:var(--muted)}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.4);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal{background:#fff;border-radius:16px;max-width:1100px;width:96%;max-height:90vh;display:flex;flex-direction:column;border:1px solid #e5e7eb}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #e5e7eb}
+.modal-body{padding:12px;overflow:auto}
+.modal[hidden]{display:none}
+.modal-overlay[hidden]{display:none}
+
+/* Badges */
+.badge{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;border:1px solid #e5e7eb}
+
+@media(max-width:1100px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:relative;top:0}
+  .grid-dashboard{grid-template-columns:repeat(6,1fr)}
+  .card-lg{grid-column:span 6}
+  .card-md{grid-column:span 6}
+  .card-sm{grid-column:span 3}
+}
+
+:root{
+  --white:#FFFFFF;
+  --light:#E6F4F9;
+  --primary:#2B8EFF; /* Medical Blue */
+  --primary-dark:#1f6ed3;
+  --teal:#00BFA5;
+  --soft:#F5F5F5;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Poppins', Inter, system-ui, Arial, sans-serif;background:var(--light);color:var(--text)}
+/* Medical vibe background */
+body{
+  background:
+    radial-gradient(1400px 700px at -10% -20%, rgba(43,142,255,.08), transparent),
+    radial-gradient(900px 500px at 110% 0%, rgba(0,191,165,.08), transparent),
+    linear-gradient(180deg, #E6F4F9, #F5F5F5 50%, #EAF7FB 100%);
+}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+/* Sticky medical navbar */
+.nav{background:var(--primary);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 8px 24px rgba(2,6,23,.15)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--primary));display:flex;align-items:center;justify-content:center;color:#fff}
+.nav a{color:#e9f2ff;text-decoration:none;margin:0 10px;padding:8px 12px;border-radius:10px;transition:all .2s ease}
+.nav a.active,.nav a:hover{background:rgba(255,255,255,.15);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.15) inset}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;padding:48px 0}
+.card{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid #e5e7eb;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(2,6,23,.08)}
+.h1{font-size:36px;margin:0 0 12px}
+.p{color:var(--muted);margin:0 0 16px}
+/* Gradient button with glow */
+.btn{background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;padding:12px 18px;border:none;border-radius:12px;cursor:pointer;box-shadow:0 8px 18px rgba(43,142,255,.25);transition:transform .15s ease, box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,191,165,.35)}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.form label{display:block;margin:8px 0 4px;color:var(--muted)}
+.form input,.form select{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi .item{background:#ffffffb8;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,.06)}
+.footer{padding:30px 0;color:var(--muted);text-align:center}
+.chart{height:340px}
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeIn .5s ease both}
+.slide-up{animation:slideUp .6s ease both}
+/* Tips page */
+.tips-controls{display:flex;gap:10px;align-items:center;margin:10px 0}
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tip-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:rgba(255,255,255,.75);backdrop-filter: blur(6px);transition:transform .15s ease, box-shadow .2s ease}
+.tip-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(2,6,23,.12)}
+.tip-card h4{margin:0 0 8px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}.kpi{grid-template-columns:1fr 1fr}}
