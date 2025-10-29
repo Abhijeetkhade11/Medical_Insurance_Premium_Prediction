@@ -6,6 +6,390 @@
   <title>MedInsure AI — Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css"/>
+  <style>
+    body {
+      background: linear-gradient(135deg, #e3f2fd 0%, #e0f7fa 100%);
+      min-height: 100vh;
+    }
+    
+    .nav {
+      background: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
+      box-shadow: 0 2px 10px rgba(33, 150, 243, 0.2);
+    }
+    
+    .nav .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    
+    .nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: white;
+    }
+    
+    .nav .logo {
+      font-size: 1.5rem;
+    }
+    
+    .nav a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    
+    .nav a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+    
+    .nav a.active {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .hero {
+      position: relative;
+      padding: 80px 0 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(0, 188, 212, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 10s ease-in-out infinite reverse;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #1a237e;
+      font-weight: 700;
+    }
+    
+    .hero .p {
+      font-size: 1.2rem;
+      color: #546e7a;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    
+    .btn {
+      position: relative;
+      padding: 15px 32px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn:first-child {
+      background: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
+      color: white;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+    }
+    
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card.visual-card {
+      background: white;
+      border: none;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(33, 150, 243, 0.15);
+    }
+    
+    .card.visual-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(33, 150, 243, 0.05), transparent);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 50px;
+      margin-bottom: 70px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .stat-card {
+      background: white;
+      border: none;
+      padding: 28px;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(33, 150, 243, 0.1);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(33, 150, 243, 0.2);
+    }
+    
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2196F3, #00BCD4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    
+    .stat-label {
+      font-size: 0.95rem;
+      color: #78909c;
+      font-weight: 500;
+    }
+    
+    .features-section {
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 50px;
+      color: #1a237e;
+      font-weight: 700;
+    }
+    
+    .grid.two {
+      gap: 24px;
+    }
+    
+    .card {
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: white;
+      border: none;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(33, 150, 243, 0.1);
+    }
+    
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(0, 188, 212, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 16px;
+    }
+    
+    .card:hover::after {
+      opacity: 1;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(33, 150, 243, 0.25);
+    }
+    
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+      color: #1a237e;
+      font-weight: 600;
+    }
+    
+    .card .p {
+      position: relative;
+      z-index: 1;
+      color: #546e7a;
+      line-height: 1.6;
+    }
+    
+    .floating-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .cta-section {
+      margin-top: 80px;
+      margin-bottom: 60px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.08) 0%, rgba(0, 188, 212, 0.08) 100%);
+      border-radius: 24px;
+      border: 2px solid rgba(33, 150, 243, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(33, 150, 243, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveGrid 20s linear infinite;
+    }
+    
+    @keyframes moveGrid {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(40px, 40px); }
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      color: #1a237e;
+      font-weight: 700;
+    }
+    
+    .cta-section .p {
+      font-size: 1.15rem;
+      color: #546e7a;
+      margin-bottom: 32px;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 28px;
+      border-top: 1px solid rgba(33, 150, 243, 0.1);
+      color: #78909c;
+      font-size: 0.95rem;
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 0;
+      }
+      
+      .h1 {
+        font-size: 2.2rem;
+      }
+      
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="nav">
@@ -24,31 +408,141 @@
 
   <div class="container">
     <section class="hero fade-in">
-      <div class="slide-up">
+      <div class="slide-up hero-content">
         <h1 class="h1">Predict Your Health Insurance Premium Instantly.</h1>
-        <p class="p">AI-powered insights to estimate your yearly medical insurance cost.</p>
-        <div style="display:flex; gap:12px; margin-top:8px;">
+        <p class="p">AI-powered insights to estimate your yearly medical insurance cost with precision and transparency.</p>
+        <div class="btn-group">
           <a class="btn" href="./predict.html">Get Started</a>
-          <a class="btn" style="background:linear-gradient(135deg,var(--teal),var(--primary))" href="./analysis.html">Explore Analysis</a>
+          <a class="btn" style="background:linear-gradient(135deg,#00BCD4,#2196F3)" href="./analysis.html">Explore Analysis</a>
         </div>
       </div>
-      <div class="card slide-up" style="text-align:center">
-        <svg width="100%" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="20" width="380" height="140" rx="16" fill="url(#g)"/>
-          <path d="M20 90 H90 L110 70 L140 110 L170 60 L210 120 L240 85 L270 95 L320 70 L370 100" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2B8EFF"/><stop offset="1" stop-color="#00BFA5"/></linearGradient></defs>
-        </svg>
-        <p class="p">Smart. Fast. Accurate.</p>
+      <div class="slide-up hero-visual">
+        <div class="card visual-card">
+          <svg width="100%" height="280" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#2196F3"/>
+                <stop offset="1" stop-color="#00BCD4"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                <stop stop-color="#4CAF50"/>
+                <stop offset="1" stop-color="#8BC34A"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            
+            <!-- Background circles -->
+            <circle cx="200" cy="140" r="100" fill="url(#g1)" opacity="0.1"/>
+            <circle cx="200" cy="140" r="70" fill="url(#g1)" opacity="0.15"/>
+            
+            <!-- Health cross icon in center -->
+            <g transform="translate(200, 140)">
+              <rect x="-10" y="-35" width="20" height="70" rx="4" fill="url(#g1)" filter="url(#glow)"/>
+              <rect x="-35" y="-10" width="70" height="20" rx="4" fill="url(#g1)" filter="url(#glow)"/>
+              <circle cx="0" cy="0" r="50" stroke="url(#g1)" stroke-width="3" fill="none" opacity="0.3"/>
+            </g>
+            
+            <!-- Floating particles around -->
+            <circle cx="80" cy="60" r="6" fill="#2196F3" opacity="0.6">
+              <animate attributeName="cy" values="60;50;60" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="320" cy="80" r="5" fill="#00BCD4" opacity="0.6">
+              <animate attributeName="cy" values="80;70;80" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="220" r="7" fill="#2196F3" opacity="0.5">
+              <animate attributeName="cy" values="220;210;220" dur="3.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="300" cy="230" r="5" fill="#00BCD4" opacity="0.5">
+              <animate attributeName="cy" values="230;220;230" dur="2.8s" repeatCount="indefinite"/>
+            </circle>
+            
+            <!-- Heartbeat line at bottom -->
+            <g transform="translate(0, 240)">
+              <path d="M20 20 L80 20 L100 10 L120 30 L140 20 L380 20" 
+                    stroke="url(#g2)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7">
+                <animate attributeName="stroke-dasharray" values="0,500;500,0" dur="2s" repeatCount="indefinite"/>
+              </path>
+            </g>
+            
+            <!-- Small plus signs -->
+            <text x="60" y="120" font-size="20" fill="#2196F3" opacity="0.4" font-weight="bold">+</text>
+            <text x="330" y="160" font-size="20" fill="#00BCD4" opacity="0.4" font-weight="bold">+</text>
+            <text x="140" y="50" font-size="16" fill="#2196F3" opacity="0.3" font-weight="bold">+</text>
+          </svg>
+          <div style="display: flex; justify-content: center; gap: 32px; margin-top: 24px;">
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: 700; color: #2196F3; margin-bottom: 4px;">AI</div>
+              <div style="font-size: 0.85rem; color: #78909c;">Powered</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: 700; color: #00BCD4; margin-bottom: 4px;">24/7</div>
+              <div style="font-size: 0.85rem; color: #78909c;">Available</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: 700; color: #4CAF50; margin-bottom: 4px;">100%</div>
+              <div style="font-size: 0.85rem; color: #78909c;">Secure</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid two" style="margin-top:8px">
-      <div class="card fade-in"><h3>🧠 AI Predictions</h3><p class="p">Trained model delivers instant premium estimates.</p></div>
-      <div class="card fade-in"><h3>📊 Data Insights</h3><p class="p">Understand trends across demographics and lifestyle.</p></div>
-      <div class="card fade-in"><h3>💡 Personalized Tips</h3><p class="p">Learn ways to reduce long-term costs.</p></div>
-      <div class="card fade-in"><h3>🔒 Privacy First</h3><p class="p">Inputs stay on your device; no storage.</p></div>
+    <div class="stats-container fade-in">
+      <div class="stat-card">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Prediction Accuracy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">&lt;2s</div>
+        <div class="stat-label">Average Response Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Predictions Made</div>
+      </div>
+    </div>
+
+    <section class="features-section">
+      <h2 class="section-title">Why Choose MedInsure AI?</h2>
+      <section class="grid two">
+        <div class="card fade-in">
+          <div class="floating-icon">🧠</div>
+          <h3>AI Predictions</h3>
+          <p class="p">Trained model delivers instant premium estimates based on comprehensive health data analysis.</p>
+        </div>
+        <div class="card fade-in">
+          <div class="floating-icon">📊</div>
+          <h3>Data Insights</h3>
+          <p class="p">Understand trends across demographics and lifestyle factors that influence insurance costs.</p>
+        </div>
+        <div class="card fade-in">
+          <div class="floating-icon">💡</div>
+          <h3>Personalized Tips</h3>
+          <p class="p">Learn evidence-based ways to reduce long-term costs and improve your health profile.</p>
+        </div>
+        <div class="card fade-in">
+          <div class="floating-icon">🔒</div>
+          <h3>Privacy First</h3>
+          <p class="p">Your inputs stay on your device with no storage or tracking. Complete data privacy guaranteed.</p>
+        </div>
+      </section>
     </section>
-    <div class="footer">© MedInsure AI</div>
+
+    <div class="cta-section fade-in">
+      <div class="cta-content">
+        <h2>Ready to Get Started?</h2>
+        <p class="p">Join thousands who trust MedInsure AI for accurate premium predictions</p>
+        <a class="btn" href="./predict.html" style="display: inline-block;">Start Prediction Now</a>
+      </div>
+    </div>
+
+    <div class="footer">© 2025 MedInsure AI. All rights reserved.</div>
   </div>
   <script src="./assets/main.js"></script>
   <script>setActive('nav-home')</script>
