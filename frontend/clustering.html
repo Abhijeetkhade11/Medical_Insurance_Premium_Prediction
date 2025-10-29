@@ -35,7 +35,7 @@
         </div>
         <div style="grid-column:span 3">
           <label>Features</label>
-          <div class="checkboxes" id="featSel" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+          <div class="checkboxes" id="featSel" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align: center;">
             <label><input type="checkbox" value="age" checked> age</label>
             <label><input type="checkbox" value="bmi" checked> bmi</label>
             <label><input type="checkbox" value="charges" checked> charges</label>
@@ -49,7 +49,7 @@
         </div>
         <div style="display:flex;align-items:flex-end"><button class="icon-btn" id="exportCsv">Export CSV</button></div>
       </div>
-      <div class="p" style="margin-top:8px">Frontend-only simulation. Hook: POST /api/clusters to run on server and return assignments + centers.</div>
+      <!-- <div class="p" style="margin-top:8px">Frontend-only simulation. Hook: POST /api/clusters to run on server and return assignments + centers.</div> -->
       <div id="clusterInsight" class="p" style="margin-top:6px;color:var(--muted)"></div>
     </div>
 

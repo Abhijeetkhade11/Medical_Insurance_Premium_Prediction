@@ -33,10 +33,10 @@
         <div class="filters form">
           <label>Region</label>
           <div class="checkboxes" id="filter-region">
-            <label><input type="checkbox" value="northeast"> Northeast</label>
-            <label><input type="checkbox" value="northwest"> Northwest</label>
-            <label><input type="checkbox" value="southeast"> Southeast</label>
-            <label><input type="checkbox" value="southwest"> Southwest</label>
+            <label style="display: flex">  Northeast <input type="checkbox" value="northeast"></label>
+            <label style="display: flex">  Northwest<input type="checkbox" value="northwest"> </label>
+            <label style="display: flex"> Southeast<input type="checkbox" value="southeast"> </label>
+            <label style="display: flex"> Southwest<input type="checkbox" value="southwest"> </label>
           </div>
           <label>Smoker</label>
           <div class="seg" id="filter-smoker">
@@ -122,7 +122,7 @@
             <div class="insight">Premiums trend slightly with dependents.</div>
           </div>
 
-          <div class="card fade-in" data-card="line-age">
+          <div class="card card-sm fade-in" data-card="line-age">
             <div class="card-head"><div class="title">📈 Charges vs Age</div><div class="actions"><button class="icon-btn" data-download>⬇</button><button class="icon-btn" data-expand>⛶</button></div></div>
             <canvas id="chart-line-age" class="chart"></canvas>
             <div class="insight">Older ages often see higher premiums.</div>
